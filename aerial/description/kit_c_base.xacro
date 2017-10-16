@@ -4,7 +4,7 @@
   <xacro:include filename="$(find quad_description)/urdf/component_snippets.xacro" />
 
   <!-- Instantiate frame "mechanics" -->
-  <xacro:include filename="$(find quad_description)/urdf/aerial.xacro" />
+  <xacro:include filename="$(find quad_description)/urdf/kit_c.xacro" />
 
   <!-- Instantiate a controller. -->
   <xacro:controller_plugin_macro
