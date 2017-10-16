@@ -2,7 +2,7 @@
 
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
   <!-- Main gripper link -->
-  <xacro:macro name="my_gripper_macro"
+  <xacro:macro name="my_gripper_macro">
   <material name="blue">
       <color rgba="0 0 0.8 1"/>
     </material>
