@@ -1,0 +1,11 @@
+controller_list:
+  - name: fake_Quad_base_controller
+    joints:
+      - virtual_joint
+  - name: fake_manipulator_controller
+    joints:
+      - palm_riser
+      - palm_left_finger
+      - left_finger_tip
+      - palm_right_finger
+      - right_finger_tip
