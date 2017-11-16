@@ -1,3 +1,0 @@
-<launch>
-<rosparam command="load" file="$(find aerial)/config/sensors_kinect.yaml" />
-</launch>
