@@ -1,0 +1,13 @@
+manipulator:
+  # Publish all joint states -----------------------------------
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50  
+
+  #Trajectory Controllers----------------------------------------
+  manipulator_controller:
+    type: position_controllers/JointTrajectoryController
+    joints:
+      - shoulder
+      - elbow
+      - wrist
