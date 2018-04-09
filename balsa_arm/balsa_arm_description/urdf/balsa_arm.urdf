@@ -3,12 +3,12 @@
   <link name="base_link">
     <visual>
       <geometry>
-        <box size="0.065 0.003 0.055"/>
+        <box size="0.065 0.055 0.003"/>
       </geometry>
     </visual>
     <collision>
       <geometry>
-        <box size="0.065 0.003 0.055"/>
+        <box size="0.065 0.055 0.003"/>
       </geometry>
     </collision>
     <inertial>
@@ -22,7 +22,7 @@
       <geometry>
         <box size="0.090 0.003 0.023"/>
       </geometry>
-      <origin rpy="0 1.57075 0" xyz="0 0 0.050"/>
+      <origin rpy="0 1.57075 0" xyz="0 0 0.030"/>
     </visual>
     <collision>
       <geometry>
@@ -48,7 +48,7 @@
       <geometry>
         <box size="0.110 0.003 0.023"/>
       </geometry>
-      <origin rpy="0 1.57075 0" xyz="0 0 0.114"/>
+      <origin rpy="0 1.57075 0" xyz="0 0.005 0.054"/>
     </visual>
     <collision>
       <geometry>
@@ -62,7 +62,7 @@
   </link>
 
   <joint name="elbow" type="revolute">
-    <axis xyz="0 0 1"/>
+    <axis xyz="0 1 0"/>
     <limit lower="-0.2" upper="0.2" effort="2.5" velocity="1.0"/>
     <parent link="upper_arm"/>
     <child link="forearm"/>
@@ -74,7 +74,7 @@
       <geometry>
         <box size="0.045 0.003 0.022"/>
       </geometry>
-      <origin rpy="0 1.57075 0" xyz="0.010 0 0.153"/>
+      <origin rpy="0 1.57075 0" xyz="0 0.01 0.068"/>
     </visual>
     <collision>
       <geometry>
@@ -88,11 +88,11 @@
   </link>
 
   <joint name="wrist" type="revolute">
-    <axis xyz="0 0 1"/>
+    <axis xyz="0 1 0"/>
     <limit lower="-0.2" upper="0.2" effort="2.5" velocity="1.0"/>
     <parent link="forearm"/>
     <child link="palm"/>
-    <origin xyz="0 0 0.153"/>
+    <origin xyz="0 0 0.068"/>
   </joint>
 
   <transmission name="tran1">
