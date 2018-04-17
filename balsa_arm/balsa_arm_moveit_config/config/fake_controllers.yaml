@@ -1,0 +1,6 @@
+controller_list:
+  - name: fake_balsa_wood_arm_controller
+    joints:
+      - shoulder
+      - elbow
+      - wrist
