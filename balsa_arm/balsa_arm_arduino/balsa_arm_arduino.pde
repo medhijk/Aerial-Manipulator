@@ -8,6 +8,7 @@
 #include <ros.h>
 #include <sensor_msgs/JointState.h>
 #include <std_msgs/Float64>
+#include <math.h>
 
 ros::NodeHandle nh;
 
@@ -15,9 +16,13 @@ Servo servo1, servo2, servo3; //create servo objects to control a servo
 
 void messageCb( const sensor_msgs::JointState& cmd_msg){
 
-  cmd_msg_servo1 = cmd_msg.position[1];
-  cmd_msg_servo2 = cmd_msg.position[2];
-  cmd_msg_servo3 = cmd_msg.position[3];
+  servo1 = cmd_msg.position[1]; //values are in radians
+  servo2 = cmd_msg.position[2];
+  servo3 = cmd_msg.position[3];
+
+  cmd_msg_servo1 = (servo1*180)/M_PI; //converted radians to degrees
+  cmd_msg_servo2 = (servo2*180)/M_PI;
+  cmd_msg_servo3 = (servo3*180)/M_PI;
 
   servo1.write(cmd_msg_servo1);
   servo2.write(cmd_msg_servo2);
