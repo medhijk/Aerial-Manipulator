@@ -7,7 +7,7 @@
 #include <Servo.h>
 #include <ros.h>
 #include <sensor_msgs/JointState.h>
-#include <std_msgs/Float64>
+//#include <std_msgs/Float64>
 #include <math.h>
 
 ros::NodeHandle nh;
@@ -16,9 +16,9 @@ Servo servo1, servo2, servo3; //create servo objects to control a servo
 
 void messageCb( const sensor_msgs::JointState& cmd_msg){
 
-  servo1 = cmd_msg.position[1]; //values are in radians
-  servo2 = cmd_msg.position[2];
-  servo3 = cmd_msg.position[3];
+  servo1 = cmd_msg.position[0]; //values are in radians
+  servo2 = cmd_msg.position[1];
+  servo3 = cmd_msg.position[2];
 
   cmd_msg_servo1 = (servo1*180)/M_PI; //converted radians to degrees
   cmd_msg_servo2 = (servo2*180)/M_PI;
@@ -47,8 +47,6 @@ void setup()
   servo1.attach(9); //attach it to pin 9
   servo2.attach(10); //attach it to pin 10
   servo3.attach(11); //attach it to pin 11
-
-  delay(10);
 
 }
 
