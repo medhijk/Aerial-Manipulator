@@ -33,7 +33,7 @@ void messageCb( const sensor_msgs::JointState& cmd_msg){
   digitalWrite(13, HIGH-digitalRead(13));   // blink the led
 }
 
-ros::Subscriber<sensor_msgs::JointState> sub("/joint_states", &messageCb );
+ros::Subscriber<sensor_msgs::JointState> sub("/move_group_fake_controller_joint_states", &messageCb );
 
 //std_msgs::Float64 msg;
 //ros::Publisher pub("joint1_chatter", &msg);
