@@ -12,21 +12,23 @@
 
 ros::NodeHandle nh;
 
+double servorad[3];
+double servodeg[3];
 Servo servo1, servo2, servo3; //create servo objects to control a servo
 
 void messageCb( const sensor_msgs::JointState& cmd_msg){
 
-  servo1 = cmd_msg.position[0]; //values are in radians
-  servo2 = cmd_msg.position[1];
-  servo3 = cmd_msg.position[2];
+  servorad[0] = cmd_msg.position[0]; //values are in radians
+  servorad[1] = cmd_msg.position[1];
+  servorad[2] = cmd_msg.position[2];
 
-  cmd_msg_servo1 = (servo1*180)/M_PI; //converted radians to degrees
-  cmd_msg_servo2 = (servo2*180)/M_PI;
-  cmd_msg_servo3 = (servo3*180)/M_PI;
+  servodeg[0] = (servorad[0]*180)/M_PI; //converted radians to degrees
+  servodeg[1] = (servorad[1]*180)/M_PI;
+  servodeg[2] = (servorad[2]*180)/M_PI;
 
-  servo1.write(cmd_msg_servo1);
-  servo2.write(cmd_msg_servo2);
-  servo3.write(cmd_msg_servo3);
+  servo1.write(servodeg[0]);
+  servo2.write(servodeg[1]);
+  servo3.write(servodeg[2]);
 
   digitalWrite(13, HIGH-digitalRead(13));   // blink the led
 }
