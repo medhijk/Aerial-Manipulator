@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="balsa_arm_modified" >
+
+  <xacro:include filename="$(find balsa_arm_description)/urdf/balsa_arm_only_modified.urdf.xacro" /> 
+  
+  <xacro:property name="pi" value="3.1415" />    
+
+  <xacro:balsa_arm_only_modified>
+    <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+  </xacro:balsa_arm_only_modified>
+
+
+  <xacro:macro name="default_inertial" params="mass">
+    <inertial>
+      <mass value="${mass}" />
+      <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001" />
+    </inertial>
+  </xacro:macro>
+
+
+
+
+  <xacro:macro name="gripper" params="prefix reflect ycoord">
+    <joint name="${prefix}_gripper_joint" type="revolute">
+      <axis xyz="0 0 ${reflect}"/>
+      <limit effort="1000.0" lower="0.0" upper="0.548" velocity="0.5"/>
+      <origin rpy="0 0 0" xyz="0 0.01 0.03"/>
+      <parent link="palm"/>
+      <child link="${prefix}_gripper"/>
+    </joint>
+    <link name="${prefix}_gripper">
+      <visual>
+        <origin rpy="${(reflect-1)/2*pi} 0 ${pi/2}" xyz="0 ${ycoord} 0"/>
+        <geometry>
+          <mesh filename="package://balsa_arm_description/meshes/l_finger.dae" scale="0.3 0.3 0.3"/>
+        </geometry>
+      </visual>
+      <collision>
+        <geometry>
+          <mesh filename="package://balsa_arm_description/meshes/l_finger.dae" scale="0.3 0.3 0.3"/>
+        </geometry>
+        <origin rpy="${(reflect-1)/2*pi} 0 ${pi/2}" xyz="0 ${ycoord} 0"/>
+      </collision>
+      <xacro:default_inertial mass="0.01"/>
+    </link>
+
+    <!--<joint name="${prefix}_tip_joint" type="fixed">
+      <parent link="${prefix}_gripper"/>
+      <child link="${prefix}_tip"/>
+    </joint>
+    <link name="${prefix}_tip">
+      <visual>
+        <origin rpy="${(reflect-1)/2*pi} 0 ${pi/2}" xyz="0.09137 0.00495 0.04"/>
+        <geometry>
+          <mesh filename="package://balsa_arm_description/meshes/l_finger_tip.dae" scale="0.3 0.3 0.3"/>
+        </geometry>
+      </visual>
+      <collision>
+        <geometry>
+          <mesh filename="package://balsa_arm_description/meshes/l_finger_tip.dae" scale="0.3 0.3 0.3"/>
+        </geometry>
+        <origin rpy="${(reflect-1)/2*pi} 0 ${pi/2}" xyz="0.09137 0.00495 0.04"/>
+      </collision>
+      <xacro:default_inertial mass="0.05"/>
+    </link>-->
+  </xacro:macro>
+
+  <xacro:gripper prefix="left" reflect="1" ycoord="0.01"/>
+  <xacro:gripper prefix="right" reflect="-1" ycoord="0.01"/>  
+
+</robot>
