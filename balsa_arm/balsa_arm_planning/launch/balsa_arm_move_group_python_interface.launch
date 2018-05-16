@@ -1,0 +1,8 @@
+<launch>
+
+  <include file="$(find balsa_arm_moveit_config)/launch/demo.launch"/>
+
+  <node name="balsa_arm_move_group_python_interface" pkg="balsa_arm_planning" type="balsa_arm_move_group_python_interface.py" respawn="false" output="screen">
+  </node>
+
+</launch>
