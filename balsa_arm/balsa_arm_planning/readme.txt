@@ -11,3 +11,11 @@ chmod +x balsa_arm_move_group_python_interface.py
 
 After that, run the python script
 rosrun balsa_arm_planning balsa_arm_move_group_python_interface.py
+
+
+
+OR
+
+Just use a launch file with the following command:
+
+roslaunch balsa_arm_planning balsa_arm_move_group_python_interface.launch
