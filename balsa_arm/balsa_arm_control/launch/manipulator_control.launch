@@ -5,7 +5,7 @@
   <!-- load the controllers -->
   <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
     output="screen" ns="/manipulator" args=" joint_state_controller
-                    manipulator_controller
+                    balsa_arm_controller
                     
 "/>
 
