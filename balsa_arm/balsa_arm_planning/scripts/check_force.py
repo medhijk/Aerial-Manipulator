@@ -10,13 +10,19 @@ import sys
 
 
 flag = 0
+max_fx = 20
+max_fy = 20
+max_fz = 20
+max_tx = 20
+max_ty = 20
+max_tz = 20
 
 class Foo:
 
     def call_ft(force_torque):
 
         #make something from data
-
+	global flag
         force_x = force_torque.force.x
         force_y = force_torque.force.y
         force_z = force_torque.force.z
@@ -24,9 +30,7 @@ class Foo:
         torque_x = force_torque.torque.x
         torque_y = force_torque.torque.y
         torque_z = force_torque.torque.z
-        
-	global flag
-	
+
         if (force_x >= max_fx) or (force_y >= max_fy) or (force_z >= max_fz) or (torque_x >= max_tx) or (torque_y >= max_ty) or (torque_z >= max_tz):
             flag = 1
 	else:
@@ -38,6 +42,27 @@ class Foo:
         rospy.loginfo(rospy.get_caller_id() + "I heard force %s", force_torque.force)
         rospy.loginfo(rospy.get_caller_id() + "torque %s", force_torque.torque)
 
+    def __init__(self):
+        rospy.Subscriber("/gazebo/ft_sensor_topic", Wrench, self.call_ft)
+        while not rospy.is_shutdown():
+            rospy.loginfo("Connecting to %s at %d baud" % (port_name, baud))
+    
+            if (flag == 0):
+                #do this
+                
+                try:
+                    client = SerialClient(port_name, baud, fix_pyserial_for_test=fix_pyserial_for_test, auto_reset_timeout=auto_reset_timeout)
+                    client.run()
+                except KeyboardInterrupt:
+                    break
+                except SerialException:
+                    sleep(1.0)
+                    continue
+                except OSError:
+                    sleep(1.0)
+                    continue
+            else:
+                print("Too much force/torque.. cannot execute plan") 
 
 
 if __name__=="__main__":
@@ -61,22 +86,6 @@ if __name__=="__main__":
     if len(sys.argv) >= 2 :
         port_name  = sys.argv[1]
 
-    while not rospy.is_shutdown():
-        rospy.loginfo("Connecting to %s at %d baud" % (port_name, baud))
-
-        if (flag == 0):
-            #do this
-            
-            try:
-                client = SerialClient(port_name, baud, fix_pyserial_for_test=fix_pyserial_for_test, auto_reset_timeout=auto_reset_timeout)
-                client.run()
-            except KeyboardInterrupt:
-                break
-            except SerialException:
-                sleep(1.0)
-                continue
-            except OSError:
-                sleep(1.0)
-                continue
-        else:
-            print("Too much force/torque.. cannot execute plan")
+    try:
+        foo = Foo()
+    except rospy.ROSInterruptException: pass
