@@ -24,7 +24,9 @@ class Foo:
         torque_x = force_torque.torque.x
         torque_y = force_torque.torque.y
         torque_z = force_torque.torque.z
-
+        
+	global flag
+	
         if (force_x >= max_fx) or (force_y >= max_fy) or (force_z >= max_fz) or (torque_x >= max_tx) or (torque_y >= max_ty) or (torque_z >= max_tz):
             flag = 1
 	else:
@@ -35,14 +37,6 @@ class Foo:
 
         rospy.loginfo(rospy.get_caller_id() + "I heard force %s", force_torque.force)
         rospy.loginfo(rospy.get_caller_id() + "torque %s", force_torque.torque)
-
-
-
-if max_ft <= max_val:
-    #run ros node arduino
-
-else:
-    print 'Aborting execution since planned torque is unsafe' 
 
 
 
